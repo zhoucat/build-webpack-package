@@ -4,6 +4,10 @@
   "description": "开箱即用的webpack5构建配置包",
   "author": "zhou <zhou_learn@163.com>",
   "private": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhoucat/build-webpack-package.git"
+  },
   "scripts": {
     "dev": "webpack-cli serve --inline --progress --config node_modules/build-webpack-package/build/webpack.dev.conf.js",
     "start": "npm run dev",
