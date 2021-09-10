@@ -106,6 +106,9 @@ const mergeObj = merge(extendBaseConfig, {
       {
         // 匹配markdown说明文档，仅用于规避部分情况下babel-loader的控制台 warn
         test: /\.md$/,
+        include: [
+          resolve('src')
+        ],
         loader: 'file-loader'
       },
       {
@@ -135,9 +138,6 @@ const mergeObj = merge(extendBaseConfig, {
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
-        include: [
-          resolve('src')
-        ],
         options: {
           limit: 10 * 1024,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]'),

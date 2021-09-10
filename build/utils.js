@@ -7,7 +7,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const packageConfig = require('../package.json')
 
 exports.resolvePath = function (dir) {
-  console.log(path.join(__dirname, '../../../', dir))
   return path.join(__dirname, '../../../', dir)
 }
 
