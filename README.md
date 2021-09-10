@@ -82,9 +82,9 @@ $ npm rebuild
 'use strict'
 const webpack = require('webpack')
 const path = require('path')
-
+const babelConfig = require('../node_modules/build-webpack-package/babel.config')
 function resolve (dir) {
-  return path.resolve(__dirname, '../') + '/' + dir
+  return path.join(__dirname, '../node_modules', dir)
 }
 
 module.exports = {
@@ -98,15 +98,16 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [
-          resolve('node_modules/vue-echarts'),
-          resolve('node_modules/resize-detector'),
-          resolve('node_modules/mathjs/lib')
-        ]
+          resolve('vue-echarts'),
+          resolve('resize-detector'),
+          resolve('mathjs/lib'),
+          resolve('@jiaminghi/data-view/lib')
+        ],
+        options: babelConfig
       }
     ]
   }
 }
-
 ```
 
 ### 环境变量配置&扩展

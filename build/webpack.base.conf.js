@@ -7,10 +7,10 @@ const config = require('../config')
 const { VueLoaderPlugin } = require('vue-loader')
 // eslint解析
 const ESLintPlugin = require('eslint-webpack-plugin')
-
+const babelConfig = require('../babel.config')
 
 function resolve (dir) {
-  return utils.rootPath + '/' + dir
+  return path.join(__dirname, '../../../', dir)
 }
 
 const extendBaseConfig = utils.getExtendConfig('extendBuild/webpack.base.conf.js')
@@ -25,9 +25,9 @@ const createEslint = () => {
 }
 
 const mergeObj = merge(extendBaseConfig, {
-  context: path.resolve(__dirname, '../'),
+  context: resolve('src'),
   entry: {
-    app: utils.rootPath + '/src/main.js'
+    app: './main.js'
   },
   output: {
     path: config.build.assetsRoot,
@@ -99,9 +99,9 @@ const mergeObj = merge(extendBaseConfig, {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [
-          resolve('src'),
-          resolve('test')
-        ]
+          resolve('src')
+        ],
+        options: babelConfig
       },
       {
         // 匹配markdown说明文档，仅用于规避部分情况下babel-loader的控制台 warn
@@ -123,6 +123,9 @@ const mergeObj = merge(extendBaseConfig, {
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         loader: 'url-loader',
+        include: [
+          resolve('src')
+        ],
         options: {
           limit: 10 * 1024,
           name: utils.assetsPath('media/[name].[hash:7].[ext]'),
@@ -132,6 +135,9 @@ const mergeObj = merge(extendBaseConfig, {
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
         loader: 'url-loader',
+        include: [
+          resolve('src')
+        ],
         options: {
           limit: 10 * 1024,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]'),

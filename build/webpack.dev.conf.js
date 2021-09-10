@@ -27,7 +27,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
   target: 'web',
   cache: {
     type: 'filesystem',
-    cacheDirectory: utils.rootPath + '/node_modules/.temp_cache'
+    cacheDirectory: utils.resolvePath('node_modules/.cache')
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
@@ -65,16 +65,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      // template: '../index.html',
-      template: utils.rootPath + '/index.html',
+      template: utils.resolvePath('index.html'),
       inject: true
     }),
     // copy custom static assets
     new CopyWebpackPlugin({
       patterns: [
         {
-          // from: '../../static',
-          from: utils.rootPath + '/static',
+          from: utils.resolvePath('static'),
           to: config.build.assetsSubDirectory
         }
       ]

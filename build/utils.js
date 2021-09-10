@@ -6,7 +6,10 @@ const config = require('../config')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const packageConfig = require('../package.json')
 
-exports.rootPath = path.resolve(__dirname, '../../../')
+exports.resolvePath = function (dir) {
+  console.log(path.join(__dirname, '../../../', dir))
+  return path.join(__dirname, '../../../', dir)
+}
 
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
@@ -119,7 +122,7 @@ exports.createNotifierCallback = () => {
 
 exports.getExtendConfig = (path) => {
   try {
-    const basePath = exports.rootPath + '/' + path
+    const basePath = exports.resolvePath(path)
     const hasBaseExtend = fs.statSync(basePath, {
       throwIfNoEntry: false
     })
