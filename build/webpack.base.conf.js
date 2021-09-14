@@ -93,7 +93,6 @@ const mergeObj = merge(extendBaseConfig, {
       {
         test: /\.vue$/,
         loader: 'vue-loader'
-        // options: vueLoaderConfig
       },
       {
         test: /\.js$/,

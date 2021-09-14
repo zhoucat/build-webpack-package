@@ -118,6 +118,8 @@ module.exports = {
 > - ROUTER_BASE_URL：路由BASE_URL
 > - BUILD_PATH：build构建输出目录，默认为../../../dist,当前项目的dist文件夹
 > - NODE_ENV：环境模式，development 或 production
+> - PORT: 开发模式端口。默认为8080
+> - RELATIVE: 构建资源是否是相对路径引入，默认值是null，表示绝对路径引入资源
 
 1.在项目目录下新增**extendBuild**目录
 
