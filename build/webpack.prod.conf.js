@@ -69,7 +69,13 @@ const webpackConfig = merge(baseWebpackConfig, extendProdConfig, {
       // `...`,
       new CssMinimizerPlugin(),
       new TerserPlugin({
-        parallel: true
+        parallel: true,
+        terserOptions: {
+          format: {
+            comments: false,
+          },
+        },
+        extractComments: false
       })
     ]
   },
