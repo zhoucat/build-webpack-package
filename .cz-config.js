@@ -1,7 +1,7 @@
 module.exports = {
   // type 类型（定义之后，可通过上下键选择）
   types: [
-    { value: 'develop', name: 'feat:     开发（未上线的功能都选这个）' },
+    { value: 'develop', name: 'develop:   开发（未上线的功能都选这个）' },
     { value: 'feat', name: 'feat:     新增功能' },
     { value: 'fix', name: 'fix:      功能变更 或者 修复bug' },
     { value: 'refactor', name: 'refactor: 代码重构（不包括 bug 修复、功能新增）' },
