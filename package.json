@@ -1,6 +1,6 @@
 {
   "name": "build-webpack-package",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "开箱即用的webpack5构建配置包",
   "author": "zhou <zhou_learn@163.com>",
   "private": false,
