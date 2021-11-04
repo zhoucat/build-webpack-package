@@ -1,6 +1,17 @@
 const types = [
   'develop',
-  'prefix'
+  'prefix',
+  'feat',
+  'fix',
+  'refactor',
+  'build',
+  'perf',
+  'revert',
+  'debug',
+  'docs',
+  'style',
+  'test',
+  'mod'
 ]
 
 module.exports = { 
