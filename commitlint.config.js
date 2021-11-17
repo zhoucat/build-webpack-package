@@ -11,7 +11,8 @@ const types = [
   'docs',
   'style',
   'test',
-  'mod'
+  'mod',
+  'release'
 ]
 
 module.exports = { 
