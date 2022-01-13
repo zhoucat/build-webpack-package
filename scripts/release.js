@@ -15,6 +15,9 @@ const isDryRun = args.dry
 
 const isGitLab = true
 
+const isWin = /^win/.test(process.platform)
+// 检测当前环境是否Windows
+
 const versionIncrements = [
   'patch',
   'minor',
@@ -69,7 +72,11 @@ function updatePackage(pkgRoot, version, fileName) {
 }
 
 function updateVersionConfig(pkgRoot, version) {
-  run('sed', ['-i', '', `s/${currentVersion}/${version}/g`, path.resolve(pkgRoot, 'src/mixins/config.js')])
+  if (isWin) {
+    run('sed', ['-i', `s/${currentVersion}/${version}/g`, path.resolve(pkgRoot, 'src/mixins/config.js')])
+  } else {
+    run('sed', ['-i', '', `s/${currentVersion}/${version}/g`, path.resolve(pkgRoot, 'src/mixins/config.js')])
+  }
 }
 
 // main主进程
@@ -136,8 +143,13 @@ async function main () {
   await run(`npm`, ['run', 'changelog'])
   // gitlab修改changlog内参数
   if (isGitLab) {
-    await run('sed', ['-i', '', `s/https/http/g`, path.resolve(rootPath, 'CHANGELOG.md')])
-    await run('sed', ['-i', '', `s/commits/commit/g`, path.resolve(rootPath, 'CHANGELOG.md')])
+    if (isWin) {
+      await run('sed', ['-i', `s/https/http/g`, path.resolve(rootPath, 'CHANGELOG.md')])
+      await run('sed', ['-i', `s/commits/commit/g`, path.resolve(rootPath, 'CHANGELOG.md')])
+    } else {
+      await run('sed', ['-i', '', `s/https/http/g`, path.resolve(rootPath, 'CHANGELOG.md')])
+      await run('sed', ['-i', '', `s/commits/commit/g`, path.resolve(rootPath, 'CHANGELOG.md')])
+    }
   }
   // git提交commit
 
@@ -165,6 +177,8 @@ async function main () {
   // 终端输出推送到仓库
 
   await runIfNotDry('git', ['pull', '--rebase', 'origin', 'dev'])
+  // 获取标签
+  await runIfNotDry('git', ['pull'])
   await runIfNotDry('git', ['tag', `v${targetVersion}`])
   // git tag v1.0.0 => git打标签
 
