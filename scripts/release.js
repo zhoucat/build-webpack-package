@@ -13,6 +13,9 @@ const preId = args.preid || (semver.prerelease(currentVersion) && semver.prerele
 const isDryRun = args.dry
 // 命令行参数控制是否空运行,打开方式：node release.js -- --dry
 
+const branch = args.branch || 'dev'
+// 推送和拉取分支
+
 const isGitLab = true
 
 const isWin = /^win/.test(process.platform)
@@ -176,9 +179,9 @@ async function main () {
   step('\nPushing to warehouse...')
   // 终端输出推送到仓库
 
-  await runIfNotDry('git', ['pull', '--rebase', 'origin', 'dev'])
+  await runIfNotDry('git', ['pull', '--rebase', 'origin', branch])
   // 获取标签
-  await runIfNotDry('git', ['pull'])
+  await runIfNotDry('git', ['fetch', '--tags'])
   await runIfNotDry('git', ['tag', `v${targetVersion}`])
   // git tag v1.0.0 => git打标签
 
